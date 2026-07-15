@@ -17,12 +17,15 @@ def webhook():
 
     message = f"📈 Chartink Alert\n\n{data}"
 
-    requests.post(
+    response = requests.post(
         f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
         json={
             "chat_id": CHAT_ID,
             "text": message
         }
     )
+
+    print("Telegram:", response.status_code)
+    print(response.text)
 
     return "OK", 200
